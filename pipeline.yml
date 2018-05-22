@@ -1,48 +1,21 @@
 ---
 resources:
 - name: moviefun
- type: git
- source:
-   uri: https://github.com/ezhildheepa/apps-movie-fun-modernization-code
-   branch: master
-   private_key:
-   -----BEGIN RSA PRIVATE KEY-----
-   MIIEpAIBAAKCAQEAzcM5zhihS3hrOfFjPMnuft8qdtZLPKFq8Ta2+Tb5t7W1Tk1f
-   PLilFq1JWxDVsIFFZfJqo7Tj23vIwpzbVUrewwyOy4UbO3jqdVqXlDeHl4gv93Dw
-   LPLLm3PVCawf9iowdLDh4Ig+AHNs522N1Utl2Pe1v2kQjU6AdH6vu894dye4liug
-   ls379zyvc2+t9kHNFpHXHHOZfQDx7UHx97t1SmCcspnZtoJX55ZeBvnp3U3DymdQ
-   eP6UufsET9IeXa9ilLDIkD1l0CYlwmMTXLmukyj0jy6fT7MF0GLZmquXsDOW7p5b
-   RCq2cggPFE7aOoTbAbz4ybhjAuVQklJYWG+/5QIDAQABAoIBAAcdSvBfVaRgY4S7
-   Xe0KJl7opHU7b5qHEkWI2MbBKd06QSyV7EcTM1IXZ8PoTxstPRMLULicVoyOOSDR
-   f5vxXMZttro+vfROd/zaxwbu7JdGtDHgC83iDzwuwxz0gJ5oUwiV3RmAXHRziT5v
-   QUowszLPTc9yeIoKPtLIVpct00J7YzC9avuEO5BRAzBAcQYXPucYK5DReY49tLZ+
-   A+rKcNQMV/U/P3xYydytBrqA5bjc4d+DvPN6fkq43C245jybdE4Klt82KB/PhId0
-   N1fqYpGHezOsXIyqnDYPzBJtOVKtGQtNsn6mkMmGBT8eCl8R+gIo3zvgDxYTBLwG
-   9IiqswECgYEA+GJBz9DIG1ZDMvI01EOc4SixxnPchETrbHKEYQiKffejUZYOGtDg
-   jRxT97xF9XccPNb5+Z/8/iSoGMiFcfUvd+b/GL24Yb1Nt4LYTyuube1qBwxaY3zS
-   pa4kRXR+oun2RpjSdrgrvM+BCNyPS1ySV8fhxOpHHacx2vqtrR6pV+ECgYEA1BJn
-   eXOj62mNUBN156WCPTt6/csK88+Nnk+6W0scrHqZl8EgVlQXCTdjdJRnjvmrdNSE
-   G4L7g3deV3dcfpipY2Riuj0NHLSqTHjZTnUV0UOtrE6vJyVxVePhstpWG2xDrAZn
-   mCMJNNLKC0k6FIDRLR/FzlZfFh6u2Vf18nE4GIUCgYEArohEnGWlpufnkk31Z04X
-   V3PD76IMSvkuwGZ7tL9OqZMwNK0PPjKWBzHnosWuFvzaX7njr0+Hc4GIiNmmQ1w5
-   PbSYfecaP7vId3G+02rrR50zCr7YaN4WGouSOyfPsGRcRGEwSnHBcgwRLIvnONpU
-   jtAKSdchn6mTc77/+Qz5i6ECgYBjwbSC4O6+kgwzGrRfnu9AtnYIZDZmsb9ANOjI
-   gPCgAZu2UtZPRYcAgtl5wUVlb/RDJKRv/JErKj9qjW8o7c7gPhxi1s0QL7vb9Qzj
-   Zxg4M8nCP9EMbQR/Do7gfuv6Qlci2HBqlDCEdJMt8+gqNN4wh72YbfCUiyJcgo/i
-   13c3sQKBgQDYvuCL6U5brow9TWJxXzbSIUxm6pBO91/B+d5zKLP9sb7iiN9auDjN
-   CM3OrPxkGMcutJEqFtdIoGuBNllDmO6guIyfG0v6KeV061Lf4Sy7yyzW9pnKQGFB
-   luILAfZ56S1SOQAI0DJ+13nEx37WGLKYZqCBRAuHkf/SAJtPfZzMlg==
-   -----END RSA PRIVATE KEY-----
+  type: git
+  source:
+  uri: https://github.com/ezhildheepa/apps-movie-fun-modernization-code
+  branch: my-work
+  private_key: {{github-private-key}}
 
 jobs:
-- name: migrate
- plan:
- - get: moviefun
- - task: migrate-databases
-   file: moviefun/ci/migrate.yml
-   params:
-     CF_API_URL: https://api.sys.pikes.pal.pivotal.io
-     CF_USERNAME: ezhilan.muniswaran@wellsfargo.com
-     CF_PASSWORD: 2mtbkqd7
-     CF_ORG: ezhilan-muniswaran
-     CF_SPACE: sandbox
+  - name: migrate
+    plan:
+    - get: moviefun
+    - task: migrate-databases
+      file: moviefun/ci/migrate.yml
+      params:
+        CF_API_URL: {{cf-api-url}}
+        CF_USERNAME: {{cf-username}}
+        CF_PASSWORD: {{cf-password}}
+        CF_ORG: {{cf-org}}
+        CF_SPACE: {{cf-space}}
