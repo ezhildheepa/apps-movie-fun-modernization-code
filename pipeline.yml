@@ -3,9 +3,9 @@ resources:
 - name: moviefun
   type: git
   source:
-  uri: https://github.com/ezhildheepa/apps-movie-fun-modernization-code
-  branch: my-work
-  private_key: {{github-private-key}}
+    uri: https://github.com/ezhildheepa/apps-movie-fun-modernization-code
+    branch: my-work
+    private_key: {{github-private-key}}
 
 jobs:
   - name: migrate
